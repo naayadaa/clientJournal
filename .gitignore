@@ -1,0 +1,10 @@
+#Single Extensions Exclusions
+*.iml
+
+#Folders Exclusions
+*.idea*
+.idea*
+target/
+out/
+
+
