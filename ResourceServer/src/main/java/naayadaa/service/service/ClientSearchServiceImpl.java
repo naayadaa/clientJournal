@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 /**
  * Created by AnastasiiaDepenchuk on 27-Apr-18.
  */
+@Service
 public class ClientSearchServiceImpl implements ClientSearchService {
 
     private final static Logger LOG = LogManager.getLogger(ClientServiceImpl.class);
