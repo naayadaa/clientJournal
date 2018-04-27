@@ -18,21 +18,22 @@ $(function () {
     });
 
     $( "#signIn" ).click(function() {
-
+        var username = $("#username").val();
+        var password = $("#password").val();
+      //  var formData = $("form").serializeArray();
         $.ajax({
             'type': 'POST',
-            'url': "/login",
-            'contentType': 'multipart/form-data',
+            'url': "/sign_in",
+            'contentType': 'application/json',
             'data': JSON.stringify({
                 username: $("#username").val(),
                 password: $("#password").val()
             }),
-            'dataType': 'json',
+            'success': function (data, status) {
+                window.location.href = '/swagger-ui.html';
+            },
             'error': function () {
                 console.log("error")
-            },
-            'success': function (data, status) {
-                window.location.href = '/test.html';
             }});
 
     });
