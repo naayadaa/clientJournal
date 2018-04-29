@@ -1,11 +1,11 @@
 insert into client
-values(1,'Vasya', 'vasya@mail.com', 'Vasya' );
+values(1, 'vasya@mail.com', 'Vasya', 'Vasya' );
 
 insert into client
-values(2,'Petya', 'petya@mail.com', 'Petya', );
+values(2, 'petya@mail.com', 'Petya', 'Petya', );
 
 insert into client
-values(3,'Masha', 'masha@mail.com', 'Masha');
+values(3, 'masha@mail.com', 'Masha', 'Masha');
 
 insert into client
-values(4,'Marina', 'Marina', 'marina@mail.com');
+values(4, 'marina@mail.com', 'Marina', 'Marina');

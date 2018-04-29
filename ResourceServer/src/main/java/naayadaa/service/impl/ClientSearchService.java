@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface ClientSearchService {
 
-    List<ClientDTO> searchUser(final List<SpecSearchCriteria> params) throws ClientResourceError;
+    List<ClientDTO> searchClients(final List<SpecSearchCriteria> params) throws ClientResourceError;
 
 }

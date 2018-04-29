@@ -32,7 +32,7 @@ public class ClientSearchServiceImpl implements ClientSearchService {
     private ModelMapperService modelMapperService;
 
     @Override
-    public List<ClientDTO> searchUser(final List<SpecSearchCriteria> params) throws ClientResourceError{
+    public List<ClientDTO> searchClients(final List<SpecSearchCriteria> params) throws ClientResourceError{
         try {
             ClientSpecificationsBuilder clientSpecificationsBuilder = new ClientSpecificationsBuilder();
 

@@ -3,6 +3,7 @@ package naayadaa.controller;
 import naayadaa.dto.ClientDTO;
 import naayadaa.exception.ClientResourceError;
 import naayadaa.exception.ClientResourceException;
+import naayadaa.search.SpecSearchCriteria;
 import naayadaa.service.impl.ClientSearchService;
 import naayadaa.service.impl.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,9 @@ public class ClientJournalController {
 
 
     @PreAuthorize("#oauth2.hasScope('read')")
-    @RequestMapping(method = RequestMethod.GET, value = "/test")
-    public String test(){
-        return "Hello admin";
+    @RequestMapping(method = RequestMethod.POST, value = "/clients/search")
+    public List<ClientDTO> search(@RequestBody List<SpecSearchCriteria> searchCriteriaList) throws ClientResourceError {
+        return clientSearchService.searchClients(searchCriteriaList);
     }
 
     @PreAuthorize("#oauth2.hasScope('read')")

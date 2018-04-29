@@ -2,6 +2,7 @@ package naayadaa.service;
 
 
 import naayadaa.dto.ClientDTO;
+import naayadaa.dto.SearchCriteria;
 import naayadaa.exception.JournalServiceException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -115,6 +116,19 @@ public class ClientJournalService{
         }
     }
 
+    public List<ClientDTO> searchClients(List<SearchCriteria> searchCriteriaList) throws JournalServiceException {
+        HttpEntity<List<SearchCriteria>> entity = new HttpEntity<>(searchCriteriaList, getHttpHeaders());
+
+        try {
+            ResponseEntity<List<ClientDTO>> responseEntity = restTemplate.exchange(uri + "/clients/search", HttpMethod.POST, entity, new ParameterizedTypeReference<List<ClientDTO>>(){});
+
+            return responseEntity.getBody();
+        } catch (RestClientException e) {
+            LOGGER.error("Error while connecting clientJournalResource", e);
+            throw new JournalServiceException("Journal service is unavailable. Try again later", e);
+        }
+    }
+
     private HttpHeaders getHttpHeaders(){
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(new MediaType[] { MediaType.APPLICATION_JSON }));
@@ -122,4 +136,5 @@ public class ClientJournalService{
         headers.set("Authorization","Bearer " + accessTokenService.getCurrentUserAccessToken());
         return headers;
     }
+
 }

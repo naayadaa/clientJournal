@@ -1,6 +1,7 @@
 package naayadaa.controller;
 
 import naayadaa.dto.ClientDTO;
+import naayadaa.dto.SearchCriteria;
 import naayadaa.exception.JournalServiceException;
 import naayadaa.service.ClientJournalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,11 @@ public class ClientJournalController {
 
     @Autowired
     private ClientJournalService clientJournalService;
+
+    @RequestMapping(method = RequestMethod.POST, value = "/clients/search")
+    public List<ClientDTO> search(@RequestBody List<SearchCriteria> searchCriteriaList) throws JournalServiceException {
+        return clientJournalService.searchClients(searchCriteriaList);
+    }
 
     @RequestMapping(method = RequestMethod.GET, value = "/clients")
     public List<ClientDTO> getJournal() throws JournalServiceException {
