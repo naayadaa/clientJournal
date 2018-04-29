@@ -1,8 +1,7 @@
-package naayadaa.config;
+package naayadaa.config.test;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -15,8 +14,8 @@ import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
  */
 @Configuration
 @EnableResourceServer
-@Profile("!test")
-public class OAuthResourceConfig extends ResourceServerConfigurerAdapter {
+@Profile("test")
+public class TestOAuthResourceConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(final HttpSecurity http) throws Exception {
@@ -25,11 +24,10 @@ public class OAuthResourceConfig extends ResourceServerConfigurerAdapter {
                 .authorizeRequests().anyRequest().permitAll();
     }
 
-    @Primary
     @Bean
-    public RemoteTokenServices tokenServices() {
+    public RemoteTokenServices remoteTokenServices() {
         final RemoteTokenServices tokenService = new RemoteTokenServices();
-        tokenService.setCheckTokenEndpointUrl("http://localhost:8081/oauth/check_token");
+        tokenService.setCheckTokenEndpointUrl("http://localhost:8082/oauth/check_token");
         tokenService.setClientId("clientJournalResource");
         tokenService.setClientSecret("secret");
         return tokenService;

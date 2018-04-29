@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "firstName": "Vasya",
+    "lastName": "Vasya",
+    "email": "vasya@mail.com"
+  },
+  {
+    "id": 2,
+    "firstName": "Petya",
+    "lastName": "Petya",
+    "email": "petya@mail.com"
+  },
+  {
+    "id": 3,
+    "firstName": "Masha",
+    "lastName": "Masha",
+    "email": "masha@mail.com"
+  },
+  {
+    "id": 4,
+    "firstName": "Marina",
+    "lastName": "Marina",
+    "email": "marina@mail.com"
+  },
+  {
+    "id": 5,
+    "firstName": "Dima",
+    "lastName": "Dima",
+    "email": "dima@mail.com"
+  },
+  {
+    "id": 1111,
+    "firstName": "Lily",
+    "lastName": "Lily",
+    "email": "lily@mail.com"
+  }
+]
