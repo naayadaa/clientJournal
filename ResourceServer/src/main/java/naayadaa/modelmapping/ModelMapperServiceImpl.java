@@ -23,13 +23,13 @@ public class ModelMapperServiceImpl implements InitializingBean, ModelMapperServ
     @Override
     public void afterPropertiesSet() throws Exception {
         modelMapper = new ModelMapper();
-        if(converters != null){
-            for(Converter converter: converters){
+        if (converters != null) {
+            for (Converter converter : converters) {
                 modelMapper.addConverter(converter);
             }
         }
-        if(mappings != null){
-            for(PropertyMap propertyMap: mappings){
+        if (mappings != null) {
+            for (PropertyMap propertyMap : mappings) {
                 modelMapper.addMappings(propertyMap);
             }
         }
@@ -44,8 +44,7 @@ public class ModelMapperServiceImpl implements InitializingBean, ModelMapperServ
                 LOG.trace("Converted " + source + " TO: " + mapped);
             }
             return mapped;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
         }
         return null;
@@ -60,8 +59,7 @@ public class ModelMapperServiceImpl implements InitializingBean, ModelMapperServ
                 LOG.trace("Converted " + source + " TO: " + destination);
             }
             return destination;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             LOG.error(ex.getMessage(), ex);
         }
         return null;

@@ -34,11 +34,11 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public List<ClientDTO> getClients() throws ClientResourceError {
-        try{
-        List<Client> clients = clientRepository.findAll();
-        return clients.stream().map( c -> modelMapperService.map(c, ClientDTO.class)).collect(Collectors.toList());
+        try {
+            List<Client> clients = clientRepository.findAll();
+            return clients.stream().map(c -> modelMapperService.map(c, ClientDTO.class)).collect(Collectors.toList());
 
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             LOG.error(e);
             throw new ClientResourceError("An exception while client retrieving occurred. Try again later");
         }
@@ -55,23 +55,27 @@ public class ClientServiceImpl implements ClientService {
             }
 
             return modelMapperService.map(client, ClientDTO.class);
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             LOG.error(e);
             throw new ClientResourceError("An exception while client retrieving occurred");
         }
     }
 
     @Override
-    public ClientDTO create(ClientDTO clientDTO) throws ClientResourceError {
+    public ClientDTO create(ClientDTO clientDTO) throws ClientResourceError, ClientResourceException {
         Assert.notNull(clientDTO, "The client dto cannot be null");
         clientDTO.setId(null);
         Client client = modelMapperService.map(clientDTO, Client.class);
 
         try {
+            Client existed = clientRepository.findByEmail(client.getEmail());
+            if (existed != null)
+                throw new ClientResourceException("Client with this email already exist");
+
             client = clientRepository.save(client);
 
             return modelMapperService.map(client, ClientDTO.class);
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             LOG.error(e);
             throw new ClientResourceError("An exception while client creating occurred");
         }
@@ -85,14 +89,14 @@ public class ClientServiceImpl implements ClientService {
         try {
             Client client = clientRepository.findOne(clientDTO.getId());
             //if there is no client with this id, remove id to be set by db and save a new client
-            if(client == null) {
+            if (client == null) {
                 clientDTO.setId(null);
             }
             client = modelMapperService.map(clientDTO, Client.class);
             client = clientRepository.save(client);
 
             return modelMapperService.map(client, ClientDTO.class);
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             LOG.error(e);
             throw new ClientResourceError("An exception while client update occurred");
         }
@@ -109,7 +113,7 @@ public class ClientServiceImpl implements ClientService {
 
             clientRepository.delete(id);
 
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             LOG.error(e);
             throw new ClientResourceError("An exception while client update occurred");
         }

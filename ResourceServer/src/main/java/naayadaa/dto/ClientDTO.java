@@ -9,15 +9,15 @@ import javax.validation.constraints.Pattern;
 /**
  * Created by AnastasiiaDepenchuk on 27-Apr-18.
  */
-public class ClientDTO  {
+public class ClientDTO {
 
     private Integer id;
 
-    @Pattern(regexp =  "^[\\p{L} .'-]+$", message = "Wrong first name")
+    @Pattern(regexp = "^[\\p{L} .'-]+$", message = "Wrong first name")
     @NotEmpty(message = "First name cannot be empty")
     private String firstName;
 
-    @Pattern(regexp =  "^[\\p{L} .'-]+$", message = "Wrong last name")
+    @Pattern(regexp = "^[\\p{L} .'-]+$", message = "Wrong last name")
     @NotEmpty(message = "Last name cannot be empty")
     private String lastName;
 

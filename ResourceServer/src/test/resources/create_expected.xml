@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+
+    <client id="1" firstname="Vasya" lastname="Vasya" email="vasya@mail.com" />
+    <client id="2" firstname="Petya" lastname="Petya" email="petya@mail.com" />
+    <client id="3" firstname="Masha" lastname="Masha" email="masha@mail.com" />
+    <client id="4" firstname="Marina" lastname="Marina" email="marina@mail.com" />
+    <client id="5" firstname="Dima" lastname="Dima" email="dima@mail.com" />
+
+</dataset>

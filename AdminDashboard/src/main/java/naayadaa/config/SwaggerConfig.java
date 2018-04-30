@@ -3,14 +3,10 @@ package naayadaa.config;
 import com.google.common.base.Predicates;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.context.annotation.PropertySource;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import static com.google.common.base.Predicates.or;
 
 /**
  * Created by AnastasiiaDepenchuk on 04-Aug-17.

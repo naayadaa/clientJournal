@@ -6,7 +6,7 @@ package naayadaa.modelmapping;
 public interface ModelMapperService {
 
 
-     <D> D map(Object source, Class<D> destination);
+    <D> D map(Object source, Class<D> destination);
 
-     Object map(Object source, Object destination);
+    Object map(Object source, Object destination);
 }

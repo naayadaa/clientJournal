@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -48,14 +49,14 @@ public class ClientJournalController {
 
     @PreAuthorize("#oauth2.hasScope('read') and #oauth2.hasScope('write')")
     @RequestMapping(method = RequestMethod.POST, value = "/clients")
-    public ClientDTO create(@RequestBody ClientDTO clientDTO) throws ClientResourceError {
+    public ClientDTO create(@RequestBody @Valid ClientDTO clientDTO) throws ClientResourceError, ClientResourceException {
 
         return clientService.create(clientDTO);
     }
 
     @PreAuthorize("#oauth2.hasScope('read') and #oauth2.hasScope('write')")
     @RequestMapping(method = RequestMethod.PUT, value = "/clients/{id}")
-    public ClientDTO update(@RequestBody ClientDTO clientDTO, @PathVariable Integer id) throws ClientResourceError {
+    public ClientDTO update(@RequestBody @Valid ClientDTO clientDTO, @PathVariable Integer id) throws ClientResourceError {
 
         clientDTO.setId(id);
         return clientService.update(clientDTO);

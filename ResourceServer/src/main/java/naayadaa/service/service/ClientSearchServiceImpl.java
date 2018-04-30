@@ -32,7 +32,7 @@ public class ClientSearchServiceImpl implements ClientSearchService {
     private ModelMapperService modelMapperService;
 
     @Override
-    public List<ClientDTO> searchClients(final List<SpecSearchCriteria> params) throws ClientResourceError{
+    public List<ClientDTO> searchClients(final List<SpecSearchCriteria> params) throws ClientResourceError {
         try {
             ClientSpecificationsBuilder clientSpecificationsBuilder = new ClientSpecificationsBuilder();
 
@@ -43,12 +43,11 @@ public class ClientSearchServiceImpl implements ClientSearchService {
             List<Client> clients = clientRepository.findAll(clientSpecificationsBuilder.build());
 
             return clients.stream().map(c -> modelMapperService.map(c, ClientDTO.class)).collect(Collectors.toList());
-        }catch (DataAccessException e){
+        } catch (DataAccessException e) {
             LOG.error(e);
             throw new ClientResourceError("An exception while client retrieving occurred. Try again later");
         }
     }
-
 
 
 }

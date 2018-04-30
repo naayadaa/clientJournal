@@ -8,7 +8,6 @@ import com.github.springtestdbunit.annotation.ExpectedDatabase;
 import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 import naayadaa.AbstractIntegrationTest;
 import naayadaa.dto.ClientDTO;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.security.web.FilterChainProxy;
@@ -25,7 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -33,9 +32,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @ActiveProfiles("test")
 @DatabaseSetup(value = {"classpath:data.xml"})
-@ExpectedDatabase(value = "classpath:data.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
 @DatabaseTearDown(value = {"classpath:tear_down.xml"})
-public class ClientJournalControllerGet_IT extends AbstractIntegrationTest {
+public class ClientJournalControllerDelete_IT extends AbstractIntegrationTest {
 
     @Resource
     private FilterChainProxy springSecurityFilterChain;
@@ -64,51 +62,29 @@ public class ClientJournalControllerGet_IT extends AbstractIntegrationTest {
    * A not logged-in user trying to access to the endpoint will receive a 401 HTTP error
    */
     @Test
-    public void getClients_WithUnauthorisedUser() throws Exception {
-        mockMvc.perform(get("/client-journal-resource/clients"))
+    @ExpectedDatabase(value = "classpath:data.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+    public void delete_WithUnauthorisedUser_Test_OK() throws Exception {
+        mockMvc.perform(delete("/client-journal-resource/clients/{id}", 1))
                 .andExpect(status().is(401));
     }
 
-
     @Test
-    public void getAllClients_Test_OK() throws Exception {
-        RequestPostProcessor bearerToken = addBearerToken("test");
-
-        MvcResult result = mockMvc.perform(get("/client-journal-resource/clients")
-                .with(bearerToken))
-                .andExpect(status().is(200)).andReturn();
-
-        List<ClientDTO> clients = objectMapper.readValue(result.getResponse().getContentAsString(), new TypeReference<List<ClientDTO>>() {
-        });
-        Assert.assertEquals(4, clients.size());
-        for (ClientDTO client : clients) {
-            Assert.assertEquals(clientDTOS.get(client.getId()).getFirstName(), client.getFirstName());
-            Assert.assertEquals(clientDTOS.get(client.getId()).getEmail(), client.getEmail());
-            Assert.assertEquals(clientDTOS.get(client.getId()).getLastName(), client.getLastName());
-        }
-    }
-
-    @Test
-    public void getClient_Test_OK() throws Exception {
+    @ExpectedDatabase(value = "classpath:delete_expected.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+    public void deleteClient_Test_OK() throws Exception {
         RequestPostProcessor bearerToken = addBearerToken("test", "read");
 
-        MvcResult result = mockMvc.perform(get("/client-journal-resource/clients/{id}", 1)
+        MvcResult result = mockMvc.perform(delete("/client-journal-resource/clients/{id}", 1)
                 .with(bearerToken))
                 .andExpect(status().is(200)).andReturn();
-
-        ClientDTO client = objectMapper.readValue(result.getResponse().getContentAsString(), ClientDTO.class);
-
-        Assert.assertEquals(clientDTOS.get(client.getId()).getFirstName(), client.getFirstName());
-        Assert.assertEquals(clientDTOS.get(client.getId()).getEmail(), client.getEmail());
-        Assert.assertEquals(clientDTOS.get(client.getId()).getLastName(), client.getLastName());
 
     }
 
     @Test
-    public void getClient_NotFound() throws Exception {
+    @ExpectedDatabase(value = "classpath:data.xml", assertionMode = DatabaseAssertionMode.NON_STRICT)
+    public void deleteClient_NotExist() throws Exception {
         RequestPostProcessor bearerToken = addBearerToken("test", "read");
 
-        MvcResult result = mockMvc.perform(get("/client-journal-resource/clients/{id}", 10)
+        MvcResult result = mockMvc.perform(delete("/client-journal-resource/clients/{id}", 10)
                 .with(bearerToken))
                 .andExpect(status().is(404)).andReturn();
 

@@ -4,7 +4,6 @@ import naayadaa.dto.ClientDTO;
 import naayadaa.exception.ClientResourceError;
 import naayadaa.exception.ClientResourceException;
 
-
 import java.util.List;
 
 /**
@@ -16,7 +15,7 @@ public interface ClientService {
 
     ClientDTO get(Integer id) throws ClientResourceException, ClientResourceError;
 
-    ClientDTO create(ClientDTO clientDTO) throws ClientResourceError;
+    ClientDTO create(ClientDTO clientDTO) throws ClientResourceError, ClientResourceException;
 
     ClientDTO update(ClientDTO clientDTO) throws ClientResourceError;
 

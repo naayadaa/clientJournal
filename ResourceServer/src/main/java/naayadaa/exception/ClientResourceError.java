@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * Created by AnastasiiaDepenchuk on 27-Apr-18.
  */
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-public class ClientResourceError extends Exception{
+public class ClientResourceError extends Exception {
 
     public ClientResourceError() {
         super();
