@@ -2,7 +2,7 @@
 
 1. clone the repo
 2. navigate to the local repo folder 
-3. run comands:
+3. run the comands:
 ```
 C:\Users\AnastasiiaDepenchuk\IdeaProjects\clientJournal\> cd ResourceServer
 ```
@@ -12,8 +12,8 @@ C:\Users\AnastasiiaDepenchuk\IdeaProjects\clientJournal\ResourceServer> mvn inst
 ```
 C:\Users\AnastasiiaDepenchuk\IdeaProjects\clientJournal\ResourceServer> mvn spring-boot:run
 ```
+in a new console window
 ```
-C:\Users\AnastasiiaDepenchuk\IdeaProjects\clientJournal\ResourceServer> cd ..
 C:\Users\AnastasiiaDepenchuk\IdeaProjects\clientJournal\> cd AdminDashboard
 ```
 ```
